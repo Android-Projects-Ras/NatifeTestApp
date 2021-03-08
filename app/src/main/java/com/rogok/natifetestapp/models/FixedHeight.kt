@@ -1,8 +1,11 @@
 package com.rogok.natifetestapp.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class FixedHeight(
     val height: String,
     val mp4: String,
@@ -14,4 +17,4 @@ data class FixedHeight(
     @SerializedName("webp_size")
     val webpSize: String,
     val width: String
-)
+): Parcelable

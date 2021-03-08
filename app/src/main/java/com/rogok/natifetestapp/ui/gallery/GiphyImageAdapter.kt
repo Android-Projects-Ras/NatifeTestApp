@@ -9,11 +9,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rogok.natifetestapp.R
 import com.rogok.natifetestapp.databinding.ItemGiphyImageBinding
-import com.rogok.natifetestapp.models.GiphyImage1
+import com.rogok.natifetestapp.models.GiphyImage
 
-class GiphyImageAdapter : PagingDataAdapter<GiphyImage1, GiphyImageAdapter.GiphyViewHolder>(
-    IMAGE_COMPARATOR
-) {
+class GiphyImageAdapter(private val listener: OnItemClickListener) :
+    PagingDataAdapter<GiphyImage, GiphyImageAdapter.GiphyViewHolder>(
+        IMAGE_COMPARATOR
+    ) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GiphyViewHolder {
@@ -30,12 +31,27 @@ class GiphyImageAdapter : PagingDataAdapter<GiphyImage1, GiphyImageAdapter.Giphy
         }
     }
 
-    class GiphyViewHolder(private val binding: ItemGiphyImageBinding) :
+    inner class GiphyViewHolder(private val binding: ItemGiphyImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(image: GiphyImage1) {
+
+        //Click on recyclerView item
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+
+                    }
+                }
+            }
+        }
+
+        fun bind(image: GiphyImage) {
             binding.apply {
                 Glide.with(itemView)
-                    .load(image.images.original.url)
+                    .load(image.images.fixedHeightSmall.url)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
@@ -46,12 +62,16 @@ class GiphyImageAdapter : PagingDataAdapter<GiphyImage1, GiphyImageAdapter.Giphy
         }
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(image: GiphyImage)
+    }
+
     companion object {
-        private val IMAGE_COMPARATOR = object : DiffUtil.ItemCallback<GiphyImage1>() {
-            override fun areItemsTheSame(oldItem: GiphyImage1, newItem: GiphyImage1) =
+        private val IMAGE_COMPARATOR = object : DiffUtil.ItemCallback<GiphyImage>() {
+            override fun areItemsTheSame(oldItem: GiphyImage, newItem: GiphyImage) =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: GiphyImage1, newItem: GiphyImage1) =
+            override fun areContentsTheSame(oldItem: GiphyImage, newItem: GiphyImage) =
                 oldItem == newItem
         }
     }

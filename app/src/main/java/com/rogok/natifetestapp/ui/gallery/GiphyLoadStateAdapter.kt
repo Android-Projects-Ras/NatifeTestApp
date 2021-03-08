@@ -8,12 +8,13 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rogok.natifetestapp.databinding.GiphyLoadStateFooterBinding
 
-class GiphyLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<GiphyLoadStateAdapter.LoadStateViewHolder>() {
+class GiphyLoadStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<GiphyLoadStateAdapter.LoadStateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
         val binding =
             GiphyLoadStateFooterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return LoadStateViewHolder(binding)
+        return LoadStateViewHolder(binding)
 
     }
 
@@ -30,12 +31,13 @@ class GiphyLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Gi
                 retry.invoke()
             }
         }
-            fun bind(loadState: LoadState) {
-                binding.apply {
-                    progressBar.isVisible = loadState is LoadState.Loading
-                    buttonRetry.isVisible = loadState !is LoadState.Loading
-                    textViewError.isVisible = loadState !is LoadState.Loading
-                }
+
+        fun bind(loadState: LoadState) {
+            binding.apply {
+                progressBar.isVisible = loadState is LoadState.Loading
+                buttonRetry.isVisible = loadState !is LoadState.Loading
+                textViewError.isVisible = loadState !is LoadState.Loading
             }
         }
+    }
 }

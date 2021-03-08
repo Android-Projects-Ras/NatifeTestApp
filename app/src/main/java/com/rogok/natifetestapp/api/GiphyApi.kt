@@ -1,6 +1,6 @@
 package com.rogok.natifetestapp.api
 
-import com.rogok.natifetestapp.models.GiphyResponse1
+import com.rogok.natifetestapp.models.GiphyResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -28,5 +28,5 @@ interface GiphyApi {
         @Query("lang")
         lang: String = "en"
 
-    ): GiphyResponse1
+    ): GiphyResponse
 }

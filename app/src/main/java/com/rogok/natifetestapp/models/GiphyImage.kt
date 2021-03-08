@@ -6,7 +6,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
-data class GiphyImage1(
+@Parcelize
+data class GiphyImage(
     val analytics: Analytics,
     @SerializedName("analytics_response_payload")
     val analyticsResponsePayload: String,
@@ -31,11 +32,11 @@ data class GiphyImage1(
     val sourcePostUrl: String,
     @SerializedName("source_tld")
     val sourceTld: String,
-    val title: String,
+    val title: String,                 //title
     @SerializedName("trending_datetime")
     val trendingDatetime: String,
     val type: String,
     val url: String,
     @SerializedName("username")
     val userName: String                  //username
-): Serializable
+): Parcelable

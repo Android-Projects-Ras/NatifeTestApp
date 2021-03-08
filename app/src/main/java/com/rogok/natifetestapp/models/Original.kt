@@ -1,8 +1,11 @@
 package com.rogok.natifetestapp.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Original(
     val frames: String,
     val hash: String,
@@ -16,4 +19,4 @@ data class Original(
     @SerializedName("webp_size")
     val webpSize: String,
     val width: String
-)
+): Parcelable
