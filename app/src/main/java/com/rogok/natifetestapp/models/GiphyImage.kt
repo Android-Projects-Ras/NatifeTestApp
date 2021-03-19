@@ -2,12 +2,22 @@ package com.rogok.natifetestapp.models
 
 
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.rogok.natifetestapp.models.Analytics
+import com.rogok.natifetestapp.models.Images
 import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
 
+//TODO: change package to data.entities.GiphyImage
 @Parcelize
+//@Entity(tableName = "giphy_image_table")
 data class GiphyImage(
+    /*@PrimaryKey(autoGenerate = true)
+    val idForRoom: Long = 0,
+    @Embedded(prefix = "analytics_")*/
     val analytics: Analytics,
     @SerializedName("analytics_response_payload")
     val analyticsResponsePayload: String,
@@ -19,7 +29,9 @@ data class GiphyImage(
     val contentUrl: String,
     @SerializedName("embed_url")
     val embedUrl: String,
-    val id: String,                 //id
+    @Ignore
+    val id: String,                            //id
+    @Embedded(prefix = "images_")
     val images: Images,
     @SerializedName("import_datetime")
     val importDatetime: String,
@@ -32,11 +44,11 @@ data class GiphyImage(
     val sourcePostUrl: String,
     @SerializedName("source_tld")
     val sourceTld: String,
-    val title: String,                 //title
+    val title: String,                          //title
     @SerializedName("trending_datetime")
     val trendingDatetime: String,
     val type: String,
     val url: String,
     @SerializedName("username")
-    val userName: String                  //username
+    val userName: String                        //username
 ): Parcelable

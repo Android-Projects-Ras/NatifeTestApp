@@ -20,7 +20,7 @@ interface GiphyApi {
         @Query("api_key")
         apiKey: String = API_KEY,
         @Query("offset")
-        startResultPosition: Int = 0, //Maximum: “4999” Default = 0
+        pageNumber: Int = 0, //Maximum: “4999” Default = 0  page number
         @Query("rating")
         rating: String = "g",
         @Query("limit")

@@ -1,5 +1,7 @@
 package com.rogok.natifetestapp.di
 
+import android.app.Application
+import androidx.room.Room
 import com.rogok.natifetestapp.api.GiphyApi
 import dagger.Module
 import dagger.Provides
@@ -34,4 +36,17 @@ object AppModule {
     @Singleton
     fun provideGiphyApi(retrofit: Retrofit): GiphyApi =
         retrofit.create(GiphyApi::class.java)
+
+    /*@Provides
+    @Singleton
+    fun provideDatabase(app: Application) =
+        Room.databaseBuilder(app, GiphyDatabase::class.java, "giphy_database")
+            .fallbackToDestructiveMigration()
+            .build()
+
+    @Provides
+    fun provideGiphyDao(db: GiphyDatabase) = db.giphyDao()
+
+    @Provides
+    fun provideGiphyRemoteKeysDao(db: GiphyDatabase) = db.giphyRemoteKeysDao()*/
 }

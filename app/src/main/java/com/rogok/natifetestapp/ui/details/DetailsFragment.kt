@@ -15,7 +15,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.rogok.natifetestapp.R
 import com.rogok.natifetestapp.databinding.FragmentDetailsBinding
-import kotlinx.android.synthetic.main.item_giphy_image.*
 
 class DetailsFragment: Fragment(R.layout.fragment_details) {
 

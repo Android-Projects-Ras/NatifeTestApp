@@ -12,13 +12,16 @@ class GiphyRepository @Inject constructor(
     private val giphyApi: GiphyApi
 ) {
 
-    fun getSearchResult(query: String) =
+    /*Pager: This API consumes whatever the RemoteMediator or PagingSource returns
+     as a data source to it and returns a reactive stream of PagingData.
+     It can be returned as a Flow, Observable, LiveData*/
+    fun getSearchResult(query: String) =  // : LiveData<PagingData<GiphyImage>>
         Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 100,
+                pageSize = 5,
+                maxSize = 20,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {GiphyPagingSource(giphyApi, query)}
-        ).liveData
+        ).flow/*liveData*/
 }

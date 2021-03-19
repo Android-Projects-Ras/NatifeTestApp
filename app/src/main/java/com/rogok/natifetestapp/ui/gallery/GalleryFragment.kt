@@ -1,18 +1,19 @@
 package com.rogok.natifetestapp.ui.gallery
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.rogok.natifetestapp.R
 import com.rogok.natifetestapp.databinding.FragmentGalleryBinding
 import com.rogok.natifetestapp.models.GiphyImage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery), GiphyImageAdapter.OnItemClickListener {
@@ -41,9 +42,17 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), GiphyImageAdapter.O
 
         }
 
-        viewModel.giphyImages.observe(viewLifecycleOwner) {
+        /*viewModel.giphyImages.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }*/
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.giphyImagesFlow.collectLatest {
+                adapter.submitData(viewLifecycleOwner.lifecycle, it)
+            }
         }
+
+
 
         adapter.addLoadStateListener { loadState ->
             binding.apply {
@@ -75,7 +84,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), GiphyImageAdapter.O
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        /*searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     binding.recyclerView.scrollToPosition(0)
@@ -88,7 +97,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), GiphyImageAdapter.O
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
-        })
+        })*/
     }
 
     override fun onDestroyView() {
