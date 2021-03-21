@@ -47,7 +47,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), GiphyImageAdapter.O
         }*/
 
         lifecycleScope.launchWhenStarted {
-            viewModel.giphyImagesFlow.collectLatest {
+            viewModel.giphyImages.collectLatest {
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             }
         }

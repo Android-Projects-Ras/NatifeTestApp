@@ -8,11 +8,13 @@ import androidx.room.Query
 import com.rogok.natifetestapp.models.GiphyImage
 
 @Dao
-interface GiphyDao {
+interface GiphyImageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGiphyList(news: List<GiphyImage>)
+    suspend fun insertGiphyImageList(giphyImageList: List<GiphyImage>)
+
     @Query("SELECT * FROM giphy_image_table")
-    fun observeGiphyPaginated(): PagingSource<Int, GiphyImage>
+    fun getAllGiphyImages(): PagingSource<Int, GiphyImage>
+
     @Query("DELETE FROM giphy_image_table")
-    fun deleteGiphyItems(): Int
+    fun deleteGiphyImages(): Int
 }

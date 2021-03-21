@@ -1,12 +1,15 @@
 package com.rogok.natifetestapp.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.rogok.natifetestapp.api.GiphyApi
+import com.rogok.natifetestapp.data.GiphyDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,8 +20,8 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideRetrofit(): Retrofit {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -32,15 +35,15 @@ object AppModule {
             .build()
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideGiphyApi(retrofit: Retrofit): GiphyApi =
         retrofit.create(GiphyApi::class.java)
 
-    /*@Provides
     @Singleton
-    fun provideDatabase(app: Application) =
-        Room.databaseBuilder(app, GiphyDatabase::class.java, "giphy_database")
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, GiphyDatabase::class.java, "giphy_database")
             .fallbackToDestructiveMigration()
             .build()
 
@@ -48,5 +51,5 @@ object AppModule {
     fun provideGiphyDao(db: GiphyDatabase) = db.giphyDao()
 
     @Provides
-    fun provideGiphyRemoteKeysDao(db: GiphyDatabase) = db.giphyRemoteKeysDao()*/
+    fun provideGiphyRemoteKeysDao(db: GiphyDatabase) = db.giphyRemoteKeysDao()
 }

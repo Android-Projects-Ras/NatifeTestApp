@@ -7,17 +7,15 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.rogok.natifetestapp.models.Analytics
-import com.rogok.natifetestapp.models.Images
 import kotlinx.android.parcel.Parcelize
 
 //TODO: change package to data.entities.GiphyImage
 @Parcelize
-//@Entity(tableName = "giphy_image_table")
+@Entity(tableName = "giphy_image_table")
 data class GiphyImage(
-    /*@PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     val idForRoom: Long = 0,
-    @Embedded(prefix = "analytics_")*/
+    @Embedded(prefix = "analytics_")
     val analytics: Analytics,
     @SerializedName("analytics_response_payload")
     val analyticsResponsePayload: String,
@@ -29,7 +27,7 @@ data class GiphyImage(
     val contentUrl: String,
     @SerializedName("embed_url")
     val embedUrl: String,
-    @Ignore
+    //@Ignore
     val id: String,                            //id
     @Embedded(prefix = "images_")
     val images: Images,
@@ -38,7 +36,7 @@ data class GiphyImage(
     @SerializedName("is_sticker")
     val isSticker: Int,
     val rating: String,
-    val slug: String,
+    val slug: String,            //The unique slug used in this GIF's URL
     val source: String,
     @SerializedName("source_post_url")
     val sourcePostUrl: String,
@@ -51,4 +49,4 @@ data class GiphyImage(
     val url: String,
     @SerializedName("username")
     val userName: String                        //username
-): Parcelable
+) : Parcelable

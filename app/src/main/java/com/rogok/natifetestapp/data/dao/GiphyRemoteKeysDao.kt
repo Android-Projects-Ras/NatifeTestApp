@@ -10,8 +10,10 @@ import com.rogok.natifetestapp.data.entites.GiphyImageRemoteKeys
 interface GiphyRemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<GiphyImageRemoteKeys>)
-    @Query("SELECT * FROM GiphyImageRemoteKeys WHERE giphyId = :giphyId")
-    fun remoteKeysByGiphyId(giphyId: Long): GiphyImageRemoteKeys?
+
+    @Query("SELECT * FROM GiphyImageRemoteKeys WHERE giphyId = :id")
+    fun remoteKeysGiphyId(id: Long): GiphyImageRemoteKeys?
+
     @Query("DELETE FROM GiphyImageRemoteKeys")
     fun clearRemoteKeys()
 }
