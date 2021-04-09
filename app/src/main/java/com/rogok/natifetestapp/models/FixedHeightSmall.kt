@@ -7,14 +7,14 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class FixedHeightSmall(
-    val height: String,
+    /*val height: String,
     val mp4: String,
     @SerializedName("mp4_size")
     val mp4Size: String,
-    val size: String,
+    val size: String,*/
     val url: String,
-    val webp: String,
+    /*val webp: String,
     @SerializedName("webp_size")
     val webpSize: String,
-    val width: String
+    val width: String*/
 ): Parcelable

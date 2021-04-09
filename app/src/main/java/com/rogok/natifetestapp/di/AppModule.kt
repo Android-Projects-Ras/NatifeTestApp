@@ -42,7 +42,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context) =
+    fun provideDatabase(/*@ApplicationContext*/ context: Context) =
         Room.databaseBuilder(context, GiphyDatabase::class.java, "giphy_database")
             .fallbackToDestructiveMigration()
             .build()

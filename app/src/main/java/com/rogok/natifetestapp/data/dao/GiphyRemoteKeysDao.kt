@@ -11,9 +11,9 @@ interface GiphyRemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<GiphyImageRemoteKeys>)
 
-    @Query("SELECT * FROM GiphyImageRemoteKeys WHERE giphyId = :id")
+    @Query("SELECT * FROM keys_table WHERE giphyId = :id")
     fun remoteKeysGiphyId(id: Long): GiphyImageRemoteKeys?
 
-    @Query("DELETE FROM GiphyImageRemoteKeys")
+    @Query("DELETE FROM keys_table")
     fun clearRemoteKeys()
 }

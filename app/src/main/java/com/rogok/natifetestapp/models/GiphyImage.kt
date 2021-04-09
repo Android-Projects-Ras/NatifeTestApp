@@ -15,8 +15,8 @@ import kotlinx.android.parcel.Parcelize
 data class GiphyImage(
     @PrimaryKey(autoGenerate = true)
     val idForRoom: Long = 0,
-    @Embedded(prefix = "analytics_")
-    val analytics: Analytics,
+    /*@Embedded(prefix = "analytics_")
+    val analytics: Analytics,*/
     @SerializedName("analytics_response_payload")
     val analyticsResponsePayload: String,
     @SerializedName("bitly_gif_url")

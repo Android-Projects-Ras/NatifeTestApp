@@ -3,17 +3,15 @@ package com.rogok.natifetestapp.data
 import androidx.paging.PagingSource
 import com.rogok.natifetestapp.api.GiphyApi
 import com.rogok.natifetestapp.models.GiphyImage
-import com.rogok.natifetestapp.models.GiphyResponse
-import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.concurrent.Flow
+import javax.inject.Inject
 
 private const val GIPHY_START_PAGE_INDEX = 1
 
 /*PagingSource: It is a generic abstract class
 that is responsible for loading the paging data from the network*/
-class GiphyPagingSource(
+class GiphyPagingSource @Inject constructor(
     private val giphyApi: GiphyApi,
     private val query: String
 ) : PagingSource<Int, GiphyImage>() {
